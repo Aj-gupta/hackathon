@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import http from "http";
 import morgan from "morgan";
 import pluginRoutes from "./plugin.router.js";
+import cors from "cors";
 // import connectDB from './db.js'
 const notFound = (req, res) => {
   // const error = new Error(`Not Found - ${req.originalUrl}`)
@@ -22,6 +23,8 @@ const server = http.createServer(app);
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.use(cors());
 
 app.use("/plugins", pluginRoutes);
 app.use(notFound);
